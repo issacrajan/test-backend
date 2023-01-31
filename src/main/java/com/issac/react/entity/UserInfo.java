@@ -11,10 +11,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="user_info")
+@Table(name = "user_info", indexes = {
+		@Index(name = "idx_user_info_email", columnList = "email", unique = true) })
 public class UserInfo {
 
 	@Id
@@ -144,5 +146,5 @@ public class UserInfo {
 				+ ", password=" + password + ", location=" + location + ", createdTs=" + createdTs
 				+ ", updatedTs=" + updatedTs + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
-	
+
 }

@@ -38,6 +38,14 @@ public class ValidationEx {
 		return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(RecordAlreadyExists.class)
+	public ResponseEntity<ErrorResp> handleValidationExceptions(RecordAlreadyExists ex) {
+
+		ErrorResp resp = new ErrorResp(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.name(),
+				ex.getMessage());
+		return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResp> handleException(Exception ex) {
 		logger.error("exception details ", ex);
