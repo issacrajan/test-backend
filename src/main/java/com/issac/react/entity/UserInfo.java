@@ -3,6 +3,8 @@ package com.issac.react.entity;
 import java.time.Instant;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -34,10 +36,10 @@ public class UserInfo {
 
 	private String location;
 
-	@CreatedDate
+	@CreationTimestamp
 	private Instant createdTs;
 
-	@LastModifiedDate
+	@UpdateTimestamp
 	private Instant updatedTs;
 
 	private String createdBy;

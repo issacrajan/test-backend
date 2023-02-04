@@ -1,7 +1,10 @@
 package com.issac.react.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ import com.issac.react.service.UserService;
 import jakarta.validation.Valid;
 
 @RestController
+@CrossOrigin
 public class UserController {
 	private UserService userService;
 	
@@ -23,6 +27,12 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	@GetMapping("/allusers")
+	public ResponseEntity<List<UserInfoDTO>> getAllUsers() {
+		List<UserInfoDTO> dtos = userService.getAllUsers();
+		
+		return new ResponseEntity<>(dtos, HttpStatus.OK);
+	}
 	@GetMapping("/user/{email}")
 	public ResponseEntity<UserInfoDTO> getUser(@PathVariable String email) {
 		UserInfoDTO dto = userService.getUser(email);

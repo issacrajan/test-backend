@@ -39,7 +39,7 @@ public class UserInfoDTO {
 		dto.setName(u.getName());
 		dto.setLastname(u.getLastname());
 		dto.setEmail(u.getEmail());
-		dto.setPassword(u.getPassword());
+		//dto.setPassword(u.getPassword());
 		dto.setLocation(u.getLocation());
 		dto.setCreatedTs(u.getCreatedTs());
 		dto.setCreatedBy(u.getCreatedBy());
