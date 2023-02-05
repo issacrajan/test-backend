@@ -1,6 +1,7 @@
 package com.issac.react.config;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  */
 public class AuthFilter implements Filter {
+	private static final String MESSAGE_UNAUTHORIZED = "{\"message\": \"unauthorized\"}";
+
 	private static final Logger logger = LoggerFactory.getLogger(TxnFilter.class);
 	
 	private static String BEARER = "Bearer ";
@@ -34,7 +37,7 @@ public class AuthFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		String authHeader = req.getHeader("Authorization");
 		if (StringUtil.isEmpty(authHeader)) {
-			res.sendError(401);
+			send401Resp(res);
 			return;
 		}
 		String token = null;
@@ -42,7 +45,7 @@ public class AuthFilter implements Filter {
 			token = authHeader.substring(7);
 		}
 		if (StringUtil.isEmpty(token)) {
-			res.sendError(401);
+			send401Resp(res);
 			return;
 		}
 		
@@ -50,6 +53,15 @@ public class AuthFilter implements Filter {
 		
 		chain.doFilter(request, response);
 
+	}
+	
+	private void send401Resp(HttpServletResponse res) throws IOException {
+		res.sendError(401);
+		PrintWriter out = res.getWriter();
+		res.setContentType("application/json");
+		res.setCharacterEncoding("UTF-8");
+        out.print(MESSAGE_UNAUTHORIZED);
+        out.flush();   
 	}
 
 }

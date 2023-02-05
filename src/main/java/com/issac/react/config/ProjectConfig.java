@@ -17,7 +17,7 @@ public class ProjectConfig {
 		FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
 
 		registrationBean.setFilter(new AuthFilter());
-		registrationBean.addUrlPatterns("/api/*");
+		registrationBean.addUrlPatterns("/api/v1/*");
 		registrationBean.setOrder(2);
 
 		return registrationBean;
