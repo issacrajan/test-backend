@@ -16,7 +16,7 @@ import com.issac.react.service.UserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 @CrossOrigin
 public class AuthController {
 	private UserService userService;

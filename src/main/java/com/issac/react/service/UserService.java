@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.issac.react.dto.UserInfoDTO;
+import com.issac.react.dto.UserProfileDTO;
 import com.issac.react.entity.UserInfo;
 import com.issac.react.exception.RecordAlreadyExists;
 import com.issac.react.exception.RecordNotFoundException;
@@ -71,6 +72,19 @@ public class UserService {
 		user.setLastname(dto.getLastname());
 		// user.setEmail(dto.getEmail());
 		user.setPassword(dto.getPassword());
+		user.setLocation(dto.getLocation());
+
+		UserInfo savedRec = userRepo.save(user);
+		return UserInfoDTO.build(savedRec);
+	}
+	
+	public UserInfoDTO updateUserProfile(UserProfileDTO dto) {
+		UserInfo user = userRepo.findByEmail(dto.getEmail());
+		if (user == null) {
+			throw new RecordNotFoundException("user with email " + dto.getEmail() + " not found");
+		}
+		user.setName(dto.getName());
+		user.setLastname(dto.getLastname());
 		user.setLocation(dto.getLocation());
 
 		UserInfo savedRec = userRepo.save(user);
