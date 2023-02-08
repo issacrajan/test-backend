@@ -4,11 +4,12 @@ import java.time.Instant;
 
 import com.issac.react.entity.BaseEntity;
 
+
 public class BaseDTO {
-	private String createdBy;
-	private Instant createdTs;
-	private String updatedBy;
-	private String updatedTs;
+	protected String createdBy;
+	protected Instant createdTs;
+	protected String updatedBy;
+	protected String updatedTs;
 	
 	public static void build (BaseDTO dto , BaseEntity e) {
 		dto.setCreatedBy(e.getCreatedBy());
