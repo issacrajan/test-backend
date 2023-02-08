@@ -9,7 +9,7 @@ public class CompanyJobDTO extends BaseDTO {
 	private String id;
 	
 	@NotBlank(message = "job company should not be empty")
-	private String jobCmpany;
+	private String jobCompany;
 	
 	@NotBlank(message = "job position should not be empty")
 	private String jobPosition;
@@ -24,7 +24,7 @@ public class CompanyJobDTO extends BaseDTO {
 		CompanyJobDTO dto = new CompanyJobDTO();
 		
 		dto.setId(c.getId());
-		dto.setJobCmpany(c.getJobCmpany());
+		dto.setJobCompany(c.getJobCompany());
 		dto.setJobPosition(c.getJobPosition());
 		dto.setJobLocation(c.getJobLocation());
 		dto.setJobStatus(c.getJobStatus());
@@ -39,7 +39,7 @@ public class CompanyJobDTO extends BaseDTO {
 		CompanyJob e = new CompanyJob();
 		
 		e.setId(dto.getId());
-		e.setJobCmpany(dto.getJobCmpany());
+		e.setJobCompany(dto.getJobCompany());
 		e.setJobPosition(dto.getJobPosition());
 		e.setJobLocation(dto.getJobLocation());
 		e.setJobStatus(dto.getJobStatus());
@@ -50,7 +50,7 @@ public class CompanyJobDTO extends BaseDTO {
 	}
 	public void copyToEntity(CompanyJob e) {
 		
-		e.setJobCmpany(getJobCmpany());
+		e.setJobCompany(getJobCompany());
 		e.setJobPosition(getJobPosition());
 		e.setJobLocation(getJobLocation());
 		e.setJobStatus(getJobStatus());
@@ -64,12 +64,15 @@ public class CompanyJobDTO extends BaseDTO {
 		this.id = id;
 	}
 	
-	public String getJobCmpany() {
-		return jobCmpany;
+	
+	public String getJobCompany() {
+		return jobCompany;
 	}
-	public void setJobCmpany(String jobCmpany) {
-		this.jobCmpany = jobCmpany;
+
+	public void setJobCompany(String jobCompany) {
+		this.jobCompany = jobCompany;
 	}
+
 	public String getJobPosition() {
 		return jobPosition;
 	}
@@ -99,6 +102,13 @@ public class CompanyJobDTO extends BaseDTO {
 	}
 	public void setJobPostedBy(String jobPostedBy) {
 		this.jobPostedBy = jobPostedBy;
+	}
+
+	@Override
+	public String toString() {
+		return "CompanyJobDTO [id=" + id + ", jobCompany=" + jobCompany + ", jobPosition=" + jobPosition
+				+ ", jobLocation=" + jobLocation + ", jobStatus=" + jobStatus + ", jobType=" + jobType
+				+ ", jobPostedBy=" + jobPostedBy + "]";
 	}
 	
 

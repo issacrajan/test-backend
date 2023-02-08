@@ -16,6 +16,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtUtil {
 	private static String secret = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
+	private String issuer = "http://loalhost";
+	public static final String CLAIM_NAME = "name";
+	public static final String CLAIM_EMAIL = "email";
+	public static final String CLAIM_ROLE = "role";
 
 	public String createJWT(String name, String email, String role, int expiresInMins) {
 		Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
@@ -24,9 +28,10 @@ public class JwtUtil {
 		Instant now = Instant.now();
 		// @formatter:off
 		String jwtToken = Jwts.builder()
-		        .claim("name", name)
-		        .claim("email", email)
-		        .claim("role", role)
+		        .claim(CLAIM_NAME, name)
+		        .claim(CLAIM_EMAIL, email)
+		        .claim(CLAIM_ROLE, role)
+		        .setIssuer(issuer)
 		        .setSubject(name)
 		        .setId(UUID.randomUUID().toString())
 		        .setIssuedAt(Date.from(now))
@@ -34,11 +39,11 @@ public class JwtUtil {
 		        .signWith(hmacKey)
 		        .compact();
 		// @formatter:on
-		
+
 		return jwtToken;
 	}
-	
-	public Jws<Claims> parsetJWT(String jwtToken){
+
+	public Jws<Claims> parsetJWT(String jwtToken) {
 		Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
 				SignatureAlgorithm.HS256.getJcaName());
 		// @formatter:off
@@ -49,6 +54,5 @@ public class JwtUtil {
 		// @formatter:on
 		return jwt;
 	}
-	
-	
+
 }
