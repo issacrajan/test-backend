@@ -38,6 +38,10 @@
 		<appender-ref ref="Console" />
 	</root>
 
+<logger name="org.hibernate" level="trace" additivity="false">
+		<appender-ref ref="RollingFile" />
+		<appender-ref ref="Console" />
+	</logger>
 	<logger name="com.issac" level="debug" additivity="false">
 		<appender-ref ref="RollingFile" />
 		<appender-ref ref="Console" />

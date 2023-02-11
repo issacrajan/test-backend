@@ -1,13 +1,17 @@
 package com.issac.react.entity;
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 @Entity
 @Table(name = "company_job")
+@Audited
 public class CompanyJob extends BaseEntity {
 
 	@Id
@@ -21,6 +25,9 @@ public class CompanyJob extends BaseEntity {
 	private String jobType;
 	private String jobPostedBy;
 
+	@Version
+	private long vesionCol;
+	
 	public String getId() {
 		return id;
 	}
