@@ -1,5 +1,6 @@
 package com.issac.react.entity;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedBy;
