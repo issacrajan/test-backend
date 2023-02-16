@@ -3,11 +3,13 @@ package com.issac.react.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="app_role_policy")
 public class AppRolePolicy extends BaseEntity{
+	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
 	
