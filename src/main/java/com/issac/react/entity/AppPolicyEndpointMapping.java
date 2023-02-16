@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "app_policy_endpoint_mapping")
-public class AppPolicyEndpointMapping {
+public class AppPolicyEndpointMapping extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;

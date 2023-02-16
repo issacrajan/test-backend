@@ -24,7 +24,8 @@ public class BaseEntity {
 	private String updatedBy;
 	
 	@LastModifiedDate
-	private String updatedTs;
+	private Instant updatedTs;
+	
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -43,10 +44,10 @@ public class BaseEntity {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	public String getUpdatedTs() {
+	public Instant getUpdatedTs() {
 		return updatedTs;
 	}
-	public void setUpdatedTs(String updatedTs) {
+	public void setUpdatedTs(Instant updatedTs) {
 		this.updatedTs = updatedTs;
 	}
 	

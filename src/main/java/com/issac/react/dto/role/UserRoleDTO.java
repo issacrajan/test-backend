@@ -1,4 +1,6 @@
-package com.issac.react.entity;
+package com.issac.react.dto.role;
+
+import com.issac.react.dto.BaseDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,16 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name =  "app_user_role")
-public class UserRole extends BaseEntity{
-	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+public class UserRoleDTO extends BaseDTO{
 	private String id;
 	
 	private String userId;
 	private String roleId;
-	
 	public String getId() {
 		return id;
 	}

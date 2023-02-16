@@ -9,7 +9,7 @@ public class BaseDTO {
 	protected String createdBy;
 	protected Instant createdTs;
 	protected String updatedBy;
-	protected String updatedTs;
+	protected Instant updatedTs;
 	
 	public static void build (BaseDTO dto , BaseEntity e) {
 		dto.setCreatedBy(e.getCreatedBy());
@@ -35,10 +35,10 @@ public class BaseDTO {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	public String getUpdatedTs() {
+	public Instant getUpdatedTs() {
 		return updatedTs;
 	}
-	public void setUpdatedTs(String updatedTs) {
+	public void setUpdatedTs(Instant updatedTs) {
 		this.updatedTs = updatedTs;
 	}
 	
