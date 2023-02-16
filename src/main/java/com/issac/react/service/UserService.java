@@ -21,6 +21,9 @@ public class UserService {
 		this.userRepo = userRepo;
 	}
 
+	public UserInfoDTO getUserById(String userId) {
+		return UserInfoDTO.build(userRepo.getReferenceById(userId));
+	}
 	public UserInfoDTO getUser(String email) {
 		return UserInfoDTO.build(userRepo.findByEmail(email));
 	}

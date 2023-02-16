@@ -3,11 +3,18 @@ package com.issac.react.config;
 import com.issac.react.util.StringUtil;
 
 public class AppContext {
-
+	private String userId;
 	private String userName;
 	private String email;
 	private String roleName;
 	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getUserName() {
 		return getUserName("UNKNOWN");
 	}
@@ -31,6 +38,11 @@ public class AppContext {
 	}
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+	@Override
+	public String toString() {
+		return "AppContext [userId=" + userId + ", userName=" + userName + ", email=" + email + ", roleName="
+				+ roleName + "]";
 	}
 	
 	

@@ -26,7 +26,7 @@ public class CompanyJob extends BaseEntity {
 	private String jobPostedBy;
 
 	@Version
-	private long vesionCol;
+	private long versionCol;
 	
 	public String getId() {
 		return id;

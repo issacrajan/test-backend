@@ -17,17 +17,19 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtil {
 	private static String secret = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
 	private String issuer = "http://loalhost";
+	public static final String CLAIM_USER_ID = "user_id";
 	public static final String CLAIM_NAME = "name";
 	public static final String CLAIM_EMAIL = "email";
 	public static final String CLAIM_ROLE = "role";
 
-	public String createJWT(String name, String email, String role, int expiresInMins) {
+	public String createJWT(String userId, String name, String email, String role, int expiresInMins) {
 		Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
 				SignatureAlgorithm.HS256.getJcaName());
 
 		Instant now = Instant.now();
 		// @formatter:off
 		String jwtToken = Jwts.builder()
+				.claim(CLAIM_USER_ID, userId)
 		        .claim(CLAIM_NAME, name)
 		        .claim(CLAIM_EMAIL, email)
 		        .claim(CLAIM_ROLE, role)

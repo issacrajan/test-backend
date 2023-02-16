@@ -35,7 +35,7 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<UserRegisterRespDTO> createUser(@Valid @RequestBody UserInfoDTO userInfo) {
 		UserInfoDTO dto = userService.createUser(userInfo);
-		String token = jwtUtil.createJWT(dto.getName(), dto.getEmail(), "Admin", 10);
+		String token = jwtUtil.createJWT(dto.getId(),dto.getName(), dto.getEmail(), "Admin", 100);
 		logger.info("token: " + token);
 		UserRegisterRespDTO resp = new UserRegisterRespDTO(dto, token);
 		return new ResponseEntity<>(resp, HttpStatus.OK);
@@ -44,7 +44,7 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<UserRegisterRespDTO> login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
 		UserInfoDTO dto = userService.validateLogin(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-		String token = jwtUtil.createJWT(dto.getName(), dto.getEmail(), "Admin", 10);
+		String token = jwtUtil.createJWT(dto.getId(), dto.getName(), dto.getEmail(), "Admin", 100);
 		logger.info("token: " + token);
 		UserRegisterRespDTO resp = new UserRegisterRespDTO(dto, token);
 		return new ResponseEntity<>(resp, HttpStatus.OK);

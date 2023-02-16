@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.issac.react.config.AppContext;
+import com.issac.react.config.AppContextHolder;
 import com.issac.react.dto.UserInfoDTO;
 import com.issac.react.dto.UserProfileDTO;
 import com.issac.react.dto.UserRegisterRespDTO;
@@ -36,6 +38,18 @@ public class UserController {
 		
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
 	}
+	
+	@GetMapping("/getcurrentuser")
+	public ResponseEntity<UserInfoDTO> getCurrentUser() {
+		AppContext appContext = AppContextHolder.getContext();
+		
+		UserInfoDTO dto = userService.getUserById(appContext.getUserId());
+		if (dto == null) {
+			throw new RecordNotFoundException("no user record with user id: " + appContext.getUserId());
+		}
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+	
 	@GetMapping("/getuser/{email}")
 	public ResponseEntity<UserInfoDTO> getUser(@PathVariable String email) {
 		UserInfoDTO dto = userService.getUser(email);
