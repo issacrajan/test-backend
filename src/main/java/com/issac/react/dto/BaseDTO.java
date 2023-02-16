@@ -1,6 +1,8 @@
 package com.issac.react.dto;
 
-import java.time.LocalDateTime;
+
+import java.time.Instant;
+
 
 import com.issac.react.entity.BaseEntity;
 
@@ -9,7 +11,9 @@ public class BaseDTO {
 	protected String createdBy;
 	protected LocalDateTime createdTs;
 	protected String updatedBy;
-	protected LocalDateTime updatedTs;
+
+	protected Instant updatedTs;
+
 	
 	public static void build (BaseDTO dto , BaseEntity e) {
 		dto.setCreatedBy(e.getCreatedBy());
@@ -35,10 +39,11 @@ public class BaseDTO {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	public LocalDateTime getUpdatedTs() {
+
+	public Instant getUpdatedTs() {
 		return updatedTs;
 	}
-	public void setUpdatedTs(LocalDateTime updatedTs) {
+	public void setUpdatedTs(Instant updatedTs) {
 		this.updatedTs = updatedTs;
 	}
 	

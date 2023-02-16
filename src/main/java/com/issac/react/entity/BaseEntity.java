@@ -1,5 +1,6 @@
 package com.issac.react.entity;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedBy;
@@ -24,7 +25,9 @@ public class BaseEntity {
 	private String updatedBy;
 	
 	@LastModifiedDate
-	private LocalDateTime updatedTs;
+
+	private Instant updatedTs;
+
 	
 	public String getCreatedBy() {
 		return createdBy;
@@ -44,10 +47,12 @@ public class BaseEntity {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	public LocalDateTime getUpdatedTs() {
+
+	public Instant getUpdatedTs() {
 		return updatedTs;
 	}
-	public void setUpdatedTs(LocalDateTime updatedTs) {
+	public void setUpdatedTs(Instant updatedTs) {
+
 		this.updatedTs = updatedTs;
 	}
 	

@@ -17,6 +17,7 @@ public class AppRole extends BaseEntity {
 	private String roleName;
 	private String roleDesc;
 	private String enabled ;
+	
 	public String getId() {
 		return id;
 	}
