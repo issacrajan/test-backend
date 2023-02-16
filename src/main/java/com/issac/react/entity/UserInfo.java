@@ -1,12 +1,10 @@
 package com.issac.react.entity;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,10 +35,10 @@ public class UserInfo {
 	private String location;
 
 	@CreationTimestamp
-	private Instant createdTs;
+	private LocalDateTime createdTs;
 
 	@UpdateTimestamp
-	private Instant updatedTs;
+	private LocalDateTime updatedTs;
 
 	private String createdBy;
 	private String updatedBy;
@@ -93,19 +91,19 @@ public class UserInfo {
 		this.location = location;
 	}
 
-	public Instant getCreatedTs() {
+	public LocalDateTime getCreatedTs() {
 		return createdTs;
 	}
 
-	public void setCreatedTs(Instant createdTs) {
+	public void setCreatedTs(LocalDateTime createdTs) {
 		this.createdTs = createdTs;
 	}
 
-	public Instant getUpdatedTs() {
+	public LocalDateTime getUpdatedTs() {
 		return updatedTs;
 	}
 
-	public void setUpdatedTs(Instant updatedTs) {
+	public void setUpdatedTs(LocalDateTime updatedTs) {
 		this.updatedTs = updatedTs;
 	}
 

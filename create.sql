@@ -13,9 +13,9 @@ create sequence revinfo_seq start with 1 increment by 50;
     create table app_role (
        id varchar(255) not null,
         created_by varchar(255),
-        created_ts timestamp(6) with time zone,
+        created_ts timestamp(6),
         updated_by varchar(255),
-        updated_ts varchar(255),
+        updated_ts timestamp(6),
         enabled varchar(255),
         role_desc varchar(255),
         role_name varchar(255),
@@ -25,9 +25,9 @@ create sequence revinfo_seq start with 1 increment by 50;
     create table app_role_policy (
        id varchar(255) not null,
         created_by varchar(255),
-        created_ts timestamp(6) with time zone,
+        created_ts timestamp(6),
         updated_by varchar(255),
-        updated_ts varchar(255),
+        updated_ts timestamp(6),
         role_id varchar(255),
         role_policy varchar(255),
         role_policy_state varchar(255),
@@ -37,9 +37,9 @@ create sequence revinfo_seq start with 1 increment by 50;
     create table app_user_role (
        id varchar(255) not null,
         created_by varchar(255),
-        created_ts timestamp(6) with time zone,
+        created_ts timestamp(6),
         updated_by varchar(255),
-        updated_ts varchar(255),
+        updated_ts timestamp(6),
         role_id varchar(255),
         user_id varchar(255),
         primary key (id)
@@ -48,9 +48,9 @@ create sequence revinfo_seq start with 1 increment by 50;
     create table company_job (
        id varchar(255) not null,
         created_by varchar(255),
-        created_ts timestamp(6) with time zone,
+        created_ts timestamp(6),
         updated_by varchar(255),
-        updated_ts varchar(255),
+        updated_ts timestamp(6),
         job_company varchar(255),
         job_location varchar(255),
         job_position varchar(255),
@@ -83,14 +83,14 @@ create sequence revinfo_seq start with 1 increment by 50;
     create table user_info (
        id varchar(255) not null,
         created_by varchar(255),
-        created_ts timestamp(6) with time zone,
+        created_ts timestamp(6),
         email varchar(255) not null,
         lastname varchar(255),
         location varchar(255),
         name varchar(255),
         password varchar(255) not null,
         updated_by varchar(255),
-        updated_ts timestamp(6) with time zone,
+        updated_ts timestamp(6),
         primary key (id)
     );
 

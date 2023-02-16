@@ -1,6 +1,6 @@
 package com.issac.react.entity;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,23 +10,25 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Version;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
+public class BaseEntityVer {
 	
 	@CreatedBy
 	private String createdBy;
 	
 	@CreatedDate
-	private LocalDateTime createdTs;
+	private Instant createdTs;
 	
 	@LastModifiedBy
 	private String updatedBy;
 	
 	@LastModifiedDate
-
-	private Instant updatedTs;
-
+	private String updatedTs;
+	
+	@Version
+	private int versionNum;
 	
 	public String getCreatedBy() {
 		return createdBy;
@@ -34,10 +36,10 @@ public class BaseEntity {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-	public LocalDateTime getCreatedTs() {
+	public Instant getCreatedTs() {
 		return createdTs;
 	}
-	public void setCreatedTs(LocalDateTime createdTs) {
+	public void setCreatedTs(Instant createdTs) {
 		this.createdTs = createdTs;
 	}
 	public String getUpdatedBy() {
@@ -46,13 +48,23 @@ public class BaseEntity {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
-	public Instant getUpdatedTs() {
+	public String getUpdatedTs() {
 		return updatedTs;
 	}
-	public void setUpdatedTs(Instant updatedTs) {
-
+	public void setUpdatedTs(String updatedTs) {
 		this.updatedTs = updatedTs;
 	}
+	public int getVersionNum() {
+		return versionNum;
+	}
+	public void setVersionNum(int versionNum) {
+		this.versionNum = versionNum;
+	}
+	@Override
+	public String toString() {
+		return "BaseEntityVer [createdBy=" + createdBy + ", createdTs=" + createdTs + ", updatedBy="
+				+ updatedBy + ", updatedTs=" + updatedTs + ", versionNum=" + versionNum + "]";
+	}
+	
 	
 }

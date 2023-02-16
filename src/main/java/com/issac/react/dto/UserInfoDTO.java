@@ -1,6 +1,6 @@
 package com.issac.react.dto;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 import com.issac.react.entity.UserInfo;
 
@@ -24,8 +24,8 @@ public class UserInfoDTO {
 	private String password;
 	private String location;
 
-	private Instant createdTs;
-	private Instant updatedTs;
+	private LocalDateTime createdTs;
+	private LocalDateTime updatedTs;
 	private String createdBy;
 	private String updatedBy;
 	
@@ -97,19 +97,19 @@ public class UserInfoDTO {
 		this.location = location;
 	}
 
-	public Instant getCreatedTs() {
+	public LocalDateTime getCreatedTs() {
 		return createdTs;
 	}
 
-	public void setCreatedTs(Instant createdTs) {
+	public void setCreatedTs(LocalDateTime createdTs) {
 		this.createdTs = createdTs;
 	}
 
-	public Instant getUpdatedTs() {
+	public LocalDateTime getUpdatedTs() {
 		return updatedTs;
 	}
 
-	public void setUpdatedTs(Instant updatedTs) {
+	public void setUpdatedTs(LocalDateTime updatedTs) {
 		this.updatedTs = updatedTs;
 	}
 
