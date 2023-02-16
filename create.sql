@@ -1,5 +1,50 @@
 create sequence revinfo_seq start with 1 increment by 50;
 
+    create table app_policy_endpoint_mapping (
+       id varchar(255) not null,
+        endpoint_data varchar(255),
+        endpoint_method varchar(255),
+        endpoint_url varchar(255),
+        role_policy varchar(255),
+        role_policy_state varchar(255),
+        primary key (id)
+    );
+
+    create table app_role (
+       id varchar(255) not null,
+        created_by varchar(255),
+        created_ts timestamp(6),
+        updated_by varchar(255),
+        updated_ts timestamp(6),
+        enabled varchar(255),
+        role_desc varchar(255),
+        role_name varchar(255),
+        primary key (id)
+    );
+
+    create table app_role_policy (
+       id varchar(255) not null,
+        created_by varchar(255),
+        created_ts timestamp(6),
+        updated_by varchar(255),
+        updated_ts timestamp(6),
+        role_id varchar(255),
+        role_policy varchar(255),
+        role_policy_state varchar(255),
+        primary key (id)
+    );
+
+    create table app_user_role (
+       id varchar(255) not null,
+        created_by varchar(255),
+        created_ts timestamp(6),
+        updated_by varchar(255),
+        updated_ts timestamp(6),
+        role_id varchar(255),
+        user_id varchar(255),
+        primary key (id)
+    );
+
     create table company_job (
        id varchar(255) not null,
         created_by varchar(255),
