@@ -4,41 +4,52 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name =  "app_user_role")
-public class UserRole extends BaseEntity{
+@Table(name = "user_role")
+public class UserRole extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
-	
-	private String userId;
-	private String roleId;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private UserInfo user;
+
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private AppRole role;
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getUserId() {
-		return userId;
+
+	public UserInfo getUser() {
+		return user;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public void setUser(UserInfo user) {
+		this.user = user;
 	}
-	public String getRoleId() {
-		return roleId;
+
+	public AppRole getRole() {
+		return role;
 	}
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
+
+	public void setRole(AppRole role) {
+		this.role = role;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "UserRole [id=" + id + ", userId=" + userId + ", roleId=" + roleId + "]";
+		return "UserRole [id=" + id + ", user=" + user + ", role=" + role + "]";
 	}
-	
-	
+
 }

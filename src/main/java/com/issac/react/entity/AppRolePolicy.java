@@ -1,9 +1,12 @@
 package com.issac.react.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +16,10 @@ public class AppRolePolicy extends BaseEntity{
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
 	
-	private String roleId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "app_roleid")
+	private AppRole appRole;
+	
 	private String rolePolicy;
 	private String rolePolicyState; //E - enabled, D - Disabled;
 	
@@ -23,11 +29,12 @@ public class AppRolePolicy extends BaseEntity{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getRoleId() {
-		return roleId;
+	
+	public AppRole getAppRole() {
+		return appRole;
 	}
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
+	public void setAppRole(AppRole appRole) {
+		this.appRole = appRole;
 	}
 	public String getRolePolicy() {
 		return rolePolicy;
@@ -43,9 +50,8 @@ public class AppRolePolicy extends BaseEntity{
 	}
 	@Override
 	public String toString() {
-		return "AppRolePolicy [id=" + id + ", roleId=" + roleId + ", rolePolicy=" + rolePolicy
+		return "AppRolePolicy [id=" + id + ", appRole=" + appRole + ", rolePolicy=" + rolePolicy
 				+ ", rolePolicyState=" + rolePolicyState + "]";
 	}
-	
 
 }

@@ -2,20 +2,23 @@ package com.issac.react.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user_info", indexes = {
+@Table(name = "userinfo", indexes = {
 		@Index(name = "idx_user_info_email", columnList = "email", unique = true) })
 public class UserInfo {
 
@@ -33,6 +36,9 @@ public class UserInfo {
 	private String password;
 
 	private String location;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
+	private Set<UserRole> roles;
 
 	@CreationTimestamp
 	private LocalDateTime createdTs;
@@ -85,6 +91,15 @@ public class UserInfo {
 
 	public String getLocation() {
 		return location;
+	}
+
+
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 
 	public void setLocation(String location) {
@@ -143,8 +158,9 @@ public class UserInfo {
 	@Override
 	public String toString() {
 		return "UserInfo [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email
-				+ ", password=" + password + ", location=" + location + ", createdTs=" + createdTs
-				+ ", updatedTs=" + updatedTs + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+				+ ", password=" + password + ", location=" + location + ", roles=" + roles + ", createdTs="
+				+ createdTs + ", updatedTs=" + updatedTs + ", createdBy=" + createdBy + ", updatedBy="
+				+ updatedBy + "]";
 	}
 
 }
