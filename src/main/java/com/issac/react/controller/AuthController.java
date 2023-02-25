@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.issac.react.dto.UserInfoDTO;
+import com.issac.react.dto.AppUserDTO;
 import com.issac.react.dto.UserLoginDTO;
 import com.issac.react.dto.UserRegisterRespDTO;
 import com.issac.react.service.UserService;
@@ -33,8 +33,8 @@ public class AuthController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<UserRegisterRespDTO> createUser(@Valid @RequestBody UserInfoDTO userInfo) {
-		UserInfoDTO dto = userService.createUser(userInfo);
+	public ResponseEntity<UserRegisterRespDTO> createUser(@Valid @RequestBody AppUserDTO userInfo) {
+		AppUserDTO dto = userService.createUser(userInfo);
 		String token = jwtUtil.createJWT(dto.getId(),dto.getName(), dto.getEmail(), "Admin", 100);
 		logger.info("token: " + token);
 		UserRegisterRespDTO resp = new UserRegisterRespDTO(dto, token);
@@ -43,7 +43,7 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public ResponseEntity<UserRegisterRespDTO> login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
-		UserInfoDTO dto = userService.validateLogin(userLoginDTO.getEmail(), userLoginDTO.getPassword());
+		AppUserDTO dto = userService.validateLogin(userLoginDTO.getEmail(), userLoginDTO.getPassword());
 		String token = jwtUtil.createJWT(dto.getId(), dto.getName(), dto.getEmail(), "Admin", 100);
 		logger.info("token: " + token);
 		UserRegisterRespDTO resp = new UserRegisterRespDTO(dto, token);

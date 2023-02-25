@@ -7,20 +7,20 @@ package com.issac.react.dto;
  */
 public class UserRegisterRespDTO {
 
-	private UserInfoDTO user;
+	private AppUserDTO user;
 	private String token;
 	private String location;
 	
-	public UserRegisterRespDTO(UserInfoDTO user, String token) {
+	public UserRegisterRespDTO(AppUserDTO user, String token) {
 		this.user = user;
 		this.token = token;
 		this.location = user.getLocation();
 	}
 	
-	public UserInfoDTO getUser() {
+	public AppUserDTO getUser() {
 		return user;
 	}
-	public void setUser(UserInfoDTO user) {
+	public void setUser(AppUserDTO user) {
 		this.user = user;
 	}
 	public String getToken() {

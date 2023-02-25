@@ -60,8 +60,8 @@ public class JobController {
 		}
 
 		statsContainer.setStats(stat);
-		
-		//monthly app
+
+		// monthly app
 		List<MonthlyAppDTO> monthlyApp = companyJobService.getMonthlyApp(userName, 10);
 		Collections.reverse(monthlyApp);
 		statsContainer.setMonthlyApp(monthlyApp);

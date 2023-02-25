@@ -3,9 +3,9 @@ package com.issac.react.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.issac.react.entity.AppUser;
+import com.issac.react.entity.AppRolePolicy;
 
 @Repository
-public interface UserRepo extends JpaRepository<AppUser, String> {
-	AppUser findByEmail(String email);
+public interface AppRolePolicyRepo extends JpaRepository<AppRolePolicy, String> {
+
 }

@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.issac.react.dto.UserInfoDTO;
+import com.issac.react.dto.AppUserDTO;
 import com.issac.react.dto.UserProfileDTO;
-import com.issac.react.entity.UserInfo;
+import com.issac.react.entity.AppUser;
 import com.issac.react.exception.RecordAlreadyExists;
 import com.issac.react.exception.RecordNotFoundException;
 import com.issac.react.repo.UserRepo;
@@ -21,15 +21,15 @@ public class UserService {
 		this.userRepo = userRepo;
 	}
 
-	public UserInfoDTO getUserById(String userId) {
-		return UserInfoDTO.build(userRepo.getReferenceById(userId));
+	public AppUserDTO getUserById(String userId) {
+		return AppUserDTO.build(userRepo.getReferenceById(userId));
 	}
-	public UserInfoDTO getUser(String email) {
-		return UserInfoDTO.build(userRepo.findByEmail(email));
+	public AppUserDTO getUser(String email) {
+		return AppUserDTO.build(userRepo.findByEmail(email));
 	}
 
-	public UserInfoDTO validateLogin(String email, String password) {
-		UserInfo user = userRepo.findByEmail(email);
+	public AppUserDTO validateLogin(String email, String password) {
+		AppUser user = userRepo.findByEmail(email);
 		if (user == null) {
 			throw new RecordNotFoundException("user not found / invalid password");
 		}
@@ -37,52 +37,52 @@ public class UserService {
 		if (!pwdMatch) {
 			throw new RecordNotFoundException("user not found / invalid password");
 		}
-		return UserInfoDTO.build(user);
+		return AppUserDTO.build(user);
 	}
 
-	public List<UserInfoDTO> getAllUsers() {
-		List<UserInfo> list = userRepo.findAll();
-		List<UserInfoDTO> dtos = new ArrayList<>();
-		for (UserInfo u : list) {
-			dtos.add(UserInfoDTO.build(u));
+	public List<AppUserDTO> getAllUsers() {
+		List<AppUser> list = userRepo.findAll();
+		List<AppUserDTO> dtos = new ArrayList<>();
+		for (AppUser u : list) {
+			dtos.add(AppUserDTO.build(u));
 		}
 		return dtos;
 	}
 
-	public UserInfoDTO createUser(UserInfoDTO dto) {
-		UserInfo userInfo = userRepo.findByEmail(dto.getEmail());
+	public AppUserDTO createUser(AppUserDTO dto) {
+		AppUser userInfo = userRepo.findByEmail(dto.getEmail());
 		if (userInfo != null) {
 			throw new RecordAlreadyExists("user with email " + dto.getEmail() + " already exists");
 		}
-		UserInfo user = new UserInfo();
+		AppUser user = new AppUser();
 		user.setName(dto.getName());
 		user.setLastname(dto.getLastname());
 		user.setEmail(dto.getEmail());
 		user.setPassword(dto.getPassword());
 		user.setLocation(dto.getLocation());
 
-		UserInfo savedRec = userRepo.save(user);
-		return UserInfoDTO.build(savedRec);
+		AppUser savedRec = userRepo.save(user);
+		return AppUserDTO.build(savedRec);
 	}
 
-	public UserInfoDTO updateUser(UserInfoDTO dto) {
-		UserInfo userInfo = userRepo.findByEmail(dto.getEmail());
+	public AppUserDTO updateUser(AppUserDTO dto) {
+		AppUser userInfo = userRepo.findByEmail(dto.getEmail());
 		if (userInfo == null) {
 			throw new RecordNotFoundException("user with id " + dto.getId() + " not found");
 		}
-		UserInfo user = userRepo.getReferenceById(dto.getId());
+		AppUser user = userRepo.getReferenceById(dto.getId());
 		user.setName(dto.getName());
 		user.setLastname(dto.getLastname());
 		// user.setEmail(dto.getEmail());
 		user.setPassword(dto.getPassword());
 		user.setLocation(dto.getLocation());
 
-		UserInfo savedRec = userRepo.save(user);
-		return UserInfoDTO.build(savedRec);
+		AppUser savedRec = userRepo.save(user);
+		return AppUserDTO.build(savedRec);
 	}
 	
-	public UserInfoDTO updateUserProfile(UserProfileDTO dto) {
-		UserInfo user = userRepo.findByEmail(dto.getEmail());
+	public AppUserDTO updateUserProfile(UserProfileDTO dto) {
+		AppUser user = userRepo.findByEmail(dto.getEmail());
 		if (user == null) {
 			throw new RecordNotFoundException("user with email " + dto.getEmail() + " not found");
 		}
@@ -90,7 +90,7 @@ public class UserService {
 		user.setLastname(dto.getLastname());
 		user.setLocation(dto.getLocation());
 
-		UserInfo savedRec = userRepo.save(user);
-		return UserInfoDTO.build(savedRec);
+		AppUser savedRec = userRepo.save(user);
+		return AppUserDTO.build(savedRec);
 	}
 }

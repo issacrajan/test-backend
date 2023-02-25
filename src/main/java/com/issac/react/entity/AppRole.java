@@ -1,9 +1,8 @@
 package com.issac.react.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "approle")
+@Table(name = "app_role")
 public class AppRole extends BaseEntity {
 
 	@Id
@@ -22,8 +21,11 @@ public class AppRole extends BaseEntity {
 	private String roleDesc;
 	private String enabled;
 
-	@OneToMany( mappedBy = "user")
-	private Set<UserRole> users;
+	@OneToMany(mappedBy = "appRole")
+	private List<AppRolePolicy> rolePolicyList;
+
+	@OneToMany(mappedBy = "userRole")
+	private List<AppUser> users;
 
 	public String getId() {
 		return id;
@@ -57,19 +59,26 @@ public class AppRole extends BaseEntity {
 		this.enabled = enabled;
 	}
 
+	public List<AppRolePolicy> getRolePolicyList() {
+		return rolePolicyList;
+	}
 
-	public Set<UserRole> getUsers() {
+	public void setRolePolicyList(List<AppRolePolicy> rolePolicyList) {
+		this.rolePolicyList = rolePolicyList;
+	}
+
+	public List<AppUser> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Set<UserRole> users) {
+	public void setUsers(List<AppUser> users) {
 		this.users = users;
 	}
 
 	@Override
 	public String toString() {
 		return "AppRole [id=" + id + ", roleName=" + roleName + ", roleDesc=" + roleDesc + ", enabled="
-				+ enabled + ", users=" + users + "]";
+				+ enabled + "]";
 	}
 
 }

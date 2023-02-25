@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.issac.react.config.AppContext;
 import com.issac.react.config.AppContextHolder;
-import com.issac.react.dto.UserInfoDTO;
+import com.issac.react.dto.AppUserDTO;
 import com.issac.react.dto.UserProfileDTO;
 import com.issac.react.dto.UserRegisterRespDTO;
 import com.issac.react.exception.RecordNotFoundException;
@@ -33,17 +33,17 @@ public class UserController {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<List<UserInfoDTO>> getAllUsers() {
-		List<UserInfoDTO> dtos = userService.getAllUsers();
+	public ResponseEntity<List<AppUserDTO>> getAllUsers() {
+		List<AppUserDTO> dtos = userService.getAllUsers();
 		
 		return new ResponseEntity<>(dtos, HttpStatus.OK);
 	}
 	
 	@GetMapping("/getcurrentuser")
-	public ResponseEntity<UserInfoDTO> getCurrentUser() {
+	public ResponseEntity<AppUserDTO> getCurrentUser() {
 		AppContext appContext = AppContextHolder.getContext();
 		
-		UserInfoDTO dto = userService.getUserById(appContext.getUserId());
+		AppUserDTO dto = userService.getUserById(appContext.getUserId());
 		if (dto == null) {
 			throw new RecordNotFoundException("no user record with user id: " + appContext.getUserId());
 		}
@@ -51,8 +51,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/getuser/{email}")
-	public ResponseEntity<UserInfoDTO> getUser(@PathVariable String email) {
-		UserInfoDTO dto = userService.getUser(email);
+	public ResponseEntity<AppUserDTO> getUser(@PathVariable String email) {
+		AppUserDTO dto = userService.getUser(email);
 		if (dto == null) {
 			throw new RecordNotFoundException("no user record with email: " + email);
 		}
@@ -60,14 +60,14 @@ public class UserController {
 	}
 
 	@PostMapping("/createuser")
-	public ResponseEntity<UserInfoDTO> createUser(@Valid @RequestBody UserInfoDTO userInfo) {
-		UserInfoDTO dto = userService.createUser(userInfo);
+	public ResponseEntity<AppUserDTO> createUser(@Valid @RequestBody AppUserDTO userInfo) {
+		AppUserDTO dto = userService.createUser(userInfo);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 	
 	@PatchMapping("/updateprofile")
 	public ResponseEntity<UserRegisterRespDTO> updateUserProfile(@Valid @RequestBody UserProfileDTO userInfo) {
-		UserInfoDTO dto = userService.updateUserProfile(userInfo);
+		AppUserDTO dto = userService.updateUserProfile(userInfo);
 		UserRegisterRespDTO r = new UserRegisterRespDTO(dto, "1234");
 		return new ResponseEntity<>(r, HttpStatus.OK);
 	}

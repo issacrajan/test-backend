@@ -1,8 +1,6 @@
 package com.issac.react.dto;
 
-import java.time.LocalDateTime;
-
-import com.issac.react.entity.UserInfo;
+import com.issac.react.entity.AppUser;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -11,35 +9,36 @@ import jakarta.validation.constraints.NotBlank;
  * @author issac
  *
  */
-public class UserInfoDTO {
+public class AppUserDTO extends BaseDTO {
 	private String id;
 
 	@NotBlank(message = "name should not be empty")
 	private String name;
+
 	private String lastname;
 
 	@NotBlank(message = "email should not be empty")
 	private String email;
+
 	@NotBlank(message = "password should not be empty")
 	private String password;
+
 	private String location;
 
-	private LocalDateTime createdTs;
-	private LocalDateTime updatedTs;
-	private String createdBy;
-	private String updatedBy;
-	
-	public static UserInfoDTO build(UserInfo u) {
+	@NotBlank(message = "role should not be empty")
+	private String appRole;
+
+	public static AppUserDTO build(AppUser u) {
 		if (u == null) {
 			return null;
 		}
-		
-		UserInfoDTO dto = new UserInfoDTO();
+
+		AppUserDTO dto = new AppUserDTO();
 		dto.setId(u.getId());
 		dto.setName(u.getName());
 		dto.setLastname(u.getLastname());
 		dto.setEmail(u.getEmail());
-		//dto.setPassword(u.getPassword());
+		// dto.setPassword(u.getPassword());
 		dto.setLocation(u.getLocation());
 		dto.setCreatedTs(u.getCreatedTs());
 		dto.setCreatedBy(u.getCreatedBy());
@@ -97,44 +96,19 @@ public class UserInfoDTO {
 		this.location = location;
 	}
 
-	public LocalDateTime getCreatedTs() {
-		return createdTs;
+	public String getAppRole() {
+		return appRole;
 	}
 
-	public void setCreatedTs(LocalDateTime createdTs) {
-		this.createdTs = createdTs;
-	}
-
-	public LocalDateTime getUpdatedTs() {
-		return updatedTs;
-	}
-
-	public void setUpdatedTs(LocalDateTime updatedTs) {
-		this.updatedTs = updatedTs;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setAppRole(String appRole) {
+		this.appRole = appRole;
 	}
 
 	@Override
 	public String toString() {
 		return "UserInfoDTO [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email
-				+ ", password=" + password + ", location=" + location + ", createdTs=" + createdTs + ", updatedTs="
-				+ updatedTs + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+				+ ", password=" + password + ", location=" + location + ", createdTs=" + createdTs
+				+ ", updatedTs=" + updatedTs + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
 	}
-	
-	
+
 }
