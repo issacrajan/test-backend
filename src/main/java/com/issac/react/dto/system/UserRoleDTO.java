@@ -1,4 +1,4 @@
-package com.issac.react.dto.role;
+package com.issac.react.dto.system;
 
 import com.issac.react.dto.BaseDTO;
 

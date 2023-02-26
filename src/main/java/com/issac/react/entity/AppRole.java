@@ -1,5 +1,6 @@
 package com.issac.react.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -65,6 +66,14 @@ public class AppRole extends BaseEntity {
 
 	public void setRolePolicyList(List<AppRolePolicy> rolePolicyList) {
 		this.rolePolicyList = rolePolicyList;
+	}
+
+	public void addRolePolicy(AppRolePolicy rolePolicy) {
+		if (rolePolicyList == null) {
+			rolePolicyList = new ArrayList<>();
+		}
+		rolePolicyList.add(rolePolicy);
+		rolePolicy.setAppRole(this);
 	}
 
 	public List<AppUser> getUsers() {

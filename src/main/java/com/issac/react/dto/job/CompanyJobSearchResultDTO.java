@@ -1,4 +1,4 @@
-package com.issac.react.dto;
+package com.issac.react.dto.job;
 
 import java.util.List;
 

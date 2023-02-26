@@ -1,4 +1,4 @@
-package com.issac.react.controller;
+package com.issac.react.controller.job;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.issac.react.config.AppContext;
 import com.issac.react.config.AppContextHolder;
-import com.issac.react.dto.CompanyJobDTO;
-import com.issac.react.dto.CompanyJobSearchResultDTO;
-import com.issac.react.dto.JobStatsContainer;
-import com.issac.react.dto.JobStatsDTO;
-import com.issac.react.dto.JobStatusCntDTO;
-import com.issac.react.dto.MonthlyAppDTO;
 import com.issac.react.dto.SimpleResponseDTO;
+import com.issac.react.dto.job.CompanyJobDTO;
+import com.issac.react.dto.job.CompanyJobSearchResultDTO;
+import com.issac.react.dto.job.JobStatsContainer;
+import com.issac.react.dto.job.JobStatsDTO;
+import com.issac.react.dto.job.JobStatusCntDTO;
+import com.issac.react.dto.job.MonthlyAppDTO;
 import com.issac.react.service.CompanyJobService;
 
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.issac.react.controller;
+package com.issac.react.controller.auth;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.issac.react.dto.AppUserDTO;
-import com.issac.react.dto.UserLoginDTO;
-import com.issac.react.dto.UserRegisterRespDTO;
-import com.issac.react.service.UserService;
+import com.issac.react.controller.job.JobController;
+import com.issac.react.dto.system.AppUserDTO;
+import com.issac.react.dto.system.UserLoginDTO;
+import com.issac.react.dto.system.UserRegisterRespDTO;
+import com.issac.react.service.system.UserService;
 import com.issac.react.util.JwtUtil;
 
 import jakarta.validation.Valid;

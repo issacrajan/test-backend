@@ -1,5 +1,6 @@
-package com.issac.react.dto;
+package com.issac.react.dto.job;
 
+import com.issac.react.dto.BaseDTO;
 import com.issac.react.entity.CompanyJob;
 
 import jakarta.validation.constraints.NotBlank;

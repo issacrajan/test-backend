@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.issac.react.dto.CompanyJobDTO;
-import com.issac.react.dto.CompanyJobSearchDTO;
-import com.issac.react.dto.JobStatusCntDTO;
-import com.issac.react.dto.MonthlyAppDTO;
+import com.issac.react.dto.job.CompanyJobDTO;
+import com.issac.react.dto.job.CompanyJobSearchDTO;
+import com.issac.react.dto.job.JobStatusCntDTO;
+import com.issac.react.dto.job.MonthlyAppDTO;
 import com.issac.react.entity.CompanyJob;
 import com.issac.react.exception.RecordNotFoundException;
 import com.issac.react.repo.CompanyJobRepo;

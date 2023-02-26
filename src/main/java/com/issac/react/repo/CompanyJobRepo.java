@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.issac.react.dto.JobStatusCntDTO;
-import com.issac.react.dto.MonthlyAppDTO;
+import com.issac.react.dto.job.JobStatusCntDTO;
+import com.issac.react.dto.job.MonthlyAppDTO;
 import com.issac.react.entity.CompanyJob;
 
 @Repository

@@ -1,12 +1,12 @@
-package com.issac.react.service;
+package com.issac.react.service.system;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.issac.react.dto.AppUserDTO;
-import com.issac.react.dto.UserProfileDTO;
+import com.issac.react.dto.system.AppUserDTO;
+import com.issac.react.dto.system.UserProfileDTO;
 import com.issac.react.entity.AppUser;
 import com.issac.react.exception.RecordAlreadyExists;
 import com.issac.react.exception.RecordNotFoundException;

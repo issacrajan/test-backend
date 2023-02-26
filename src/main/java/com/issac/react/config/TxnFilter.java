@@ -26,23 +26,30 @@ import jakarta.servlet.http.HttpServletRequest;
 @Order(1)
 public class TxnFilter implements Filter {
 	private static final Logger logger = LoggerFactory.getLogger(TxnFilter.class);
-	
+	private static final Object mutex = new Object();
 	private Map<String, Integer> txnCnt = new HashMap<>();
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		logger.debug("Starting a TXN : {}", req.getRequestURI());
-		Integer cnt = txnCnt.get(req.getRequestURI());
-		if (cnt == null) {
-			cnt = 1;
-		} else {
-			cnt = cnt + 1;
+
+		synchronized (mutex) {
+			Integer cnt = txnCnt.get(req.getRequestURI());
+			if (cnt == null) {
+				cnt = 1;
+			} else {
+				cnt = cnt + 1;
+			}
+			txnCnt.put(req.getRequestURI(), cnt);
 		}
-		txnCnt.put(req.getRequestURI(), cnt);
-		
-		chain.doFilter(request, response);
+
+		try {
+			chain.doFilter(request, response);
+		} finally {
+			AppContextHolder.clearContext();
+		}
 	}
 
 }

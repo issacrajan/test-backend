@@ -75,17 +75,13 @@ public class AuthFilter implements Filter {
 		}
 		AppContext appContext = AppContextHolder.getContext();
 		Claims claims = parsetJWT.getBody();
-		
+
 		appContext.setUserId((String) claims.get(JwtUtil.CLAIM_USER_ID));
 		appContext.setUserName((String) claims.get(JwtUtil.CLAIM_NAME));
 		appContext.setEmail((String) claims.get(JwtUtil.CLAIM_EMAIL));
 		appContext.setRoleName((String) claims.get(JwtUtil.CLAIM_ROLE));
 
-		try {
-			chain.doFilter(request, response);
-		} finally {
-			AppContextHolder.clearContext();
-		}
+		chain.doFilter(request, response);
 		logger.info("AuthFilter processed:" + req.getRequestURI());
 	}
 

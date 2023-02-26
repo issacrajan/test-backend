@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.issac.react.dto.system.AppRoleDTO;
-import com.issac.react.service.AppRoleService;
+import com.issac.react.service.system.AppRoleService;
+
+import jakarta.validation.Valid;
 
 @RestController("/system")
 public class AppRoleController {
@@ -23,7 +25,7 @@ public class AppRoleController {
 	}
 
 	@PostMapping("/saverole/")
-	public AppRoleDTO create(AppRoleDTO appRole) {
+	public AppRoleDTO create(@Valid AppRoleDTO appRole) {
 		return appRoleService.save(appRole);
 	}
 }

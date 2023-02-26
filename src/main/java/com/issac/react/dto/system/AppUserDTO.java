@@ -1,5 +1,6 @@
-package com.issac.react.dto;
+package com.issac.react.dto.system;
 
+import com.issac.react.dto.BaseDTO;
 import com.issac.react.entity.AppUser;
 
 import jakarta.validation.constraints.NotBlank;

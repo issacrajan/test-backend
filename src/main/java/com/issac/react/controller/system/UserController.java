@@ -1,4 +1,4 @@
-package com.issac.react.controller;
+package com.issac.react.controller.system;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.issac.react.config.AppContext;
 import com.issac.react.config.AppContextHolder;
-import com.issac.react.dto.AppUserDTO;
-import com.issac.react.dto.UserProfileDTO;
-import com.issac.react.dto.UserRegisterRespDTO;
+import com.issac.react.dto.system.AppUserDTO;
+import com.issac.react.dto.system.UserProfileDTO;
+import com.issac.react.dto.system.UserRegisterRespDTO;
 import com.issac.react.exception.RecordNotFoundException;
-import com.issac.react.service.UserService;
+import com.issac.react.service.system.UserService;
 
 import jakarta.validation.Valid;
 @RequestMapping("/api/v1/user")
