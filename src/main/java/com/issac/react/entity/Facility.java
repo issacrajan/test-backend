@@ -11,6 +11,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
+/**
+ * 
+ * @author issac
+ *
+ */
 @Entity
 public class Facility extends BaseEntityVer {
 

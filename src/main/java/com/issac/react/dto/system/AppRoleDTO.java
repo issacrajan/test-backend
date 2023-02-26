@@ -3,6 +3,10 @@ package com.issac.react.dto.system;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.issac.react.config.AppContext;
 import com.issac.react.config.AppContextHolder;
 import com.issac.react.dto.BaseDTO;
@@ -11,6 +15,8 @@ import com.issac.react.entity.AppRolePolicy;
 
 import jakarta.validation.constraints.NotBlank;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
 public class AppRoleDTO extends BaseDTO {
 
 	private String id;
@@ -22,6 +28,7 @@ public class AppRoleDTO extends BaseDTO {
 
 	private String enabled = "Y";
 
+	@JsonProperty("rolePolicies")
 	private List<AppRolePolicyDTO> rolePolicyList;
 
 	public static AppRoleDTO build(AppRole role) {
@@ -29,6 +36,8 @@ public class AppRoleDTO extends BaseDTO {
 		dto.setId(role.getId());
 		dto.setRoleName(role.getRoleName());
 		dto.setRoleDesc(role.getRoleDesc());
+		BaseDTO.build(dto, role);
+
 		List<AppRolePolicy> policyList = role.getRolePolicyList();
 		for (AppRolePolicy rp : policyList) {
 			dto.addRolePolicy(AppRolePolicyDTO.build(rp));
@@ -37,7 +46,7 @@ public class AppRoleDTO extends BaseDTO {
 		return dto;
 	}
 
-	public AppRole buildEntity() {
+	public AppRole buildNewEntity() {
 		AppRole role = new AppRole();
 		role.setRoleName(roleName);
 		role.setRoleDesc(roleDesc);
@@ -56,15 +65,8 @@ public class AppRoleDTO extends BaseDTO {
 	public void updateEntity(AppRole role) {
 		role.setRoleName(roleName);
 		role.setRoleDesc(roleDesc);
-		List<AppRolePolicy> entityRolePolicyList = role.getRolePolicyList();
 
-		// add role policies
-		if (rolePolicyList != null) {
-			for (AppRolePolicyDTO rolePolicyDTO : rolePolicyList) {
-				AppRolePolicy entity = rolePolicyDTO.buildEntity();
-				role.addRolePolicy(entity);
-			}
-		}
+		role.updateRolePolicyFromDTO(rolePolicyList);
 	}
 
 	public String getId() {

@@ -5,6 +5,11 @@ import java.util.Objects;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+/**
+ * 
+ * @author issac
+ *
+ */
 @Entity
 public class Product {
 

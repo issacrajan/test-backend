@@ -1,5 +1,9 @@
 package com.issac.react.entity;
 
+import java.util.Objects;
+
+import com.issac.react.dto.system.AppRolePolicyDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -55,10 +59,31 @@ public class AppRolePolicy extends BaseEntity {
 		this.rolePolicyState = rolePolicyState;
 	}
 
-	@Override
-	public String toString() {
-		return "AppRolePolicy [id=" + id + ", appRole=" + appRole + ", rolePolicy=" + rolePolicy
-				+ ", rolePolicyState=" + rolePolicyState + "]";
+	public void updateFromDTO(AppRolePolicyDTO dto) {
+		rolePolicy = dto.getRolePolicy();
+		rolePolicyState = dto.getRolePolicyState();
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(rolePolicy);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AppRolePolicy other = (AppRolePolicy) obj;
+		return Objects.equals(rolePolicy, other.rolePolicy);
+	}
+
+	@Override
+	public String toString() {
+		return "AppRolePolicy [id=" + id + ", rolePolicy=" + rolePolicy + ", rolePolicyState="
+				+ rolePolicyState + "]";
+	}
 }

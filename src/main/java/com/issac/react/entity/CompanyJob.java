@@ -9,6 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 
+/**
+ * 
+ * @author issac
+ *
+ */
 @Entity
 @Table(name = "company_job")
 @Audited
@@ -27,7 +32,7 @@ public class CompanyJob extends BaseEntity {
 
 	@Version
 	private long versionCol;
-	
+
 	public String getId() {
 		return id;
 	}

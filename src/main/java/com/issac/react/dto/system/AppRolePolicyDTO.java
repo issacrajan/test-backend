@@ -1,10 +1,20 @@
 package com.issac.react.dto.system;
 
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.issac.react.dto.BaseDTO;
 import com.issac.react.entity.AppRolePolicy;
 
 import jakarta.validation.constraints.NotBlank;
 
+@JsonInclude(Include.NON_NULL)
+/**
+ * 
+ * @author issac
+ *
+ */
 public class AppRolePolicyDTO extends BaseDTO {
 	private String id;
 
@@ -19,6 +29,7 @@ public class AppRolePolicyDTO extends BaseDTO {
 		dto.setId(rolePolicy.getId());
 		dto.setRolePolicy(rolePolicy.getRolePolicy());
 		dto.setRolePolicyState(rolePolicy.getRolePolicyState());
+		BaseDTO.build(dto, rolePolicy);
 
 		return dto;
 	}
@@ -54,6 +65,23 @@ public class AppRolePolicyDTO extends BaseDTO {
 
 	public void setRolePolicyState(String rolePolicyState) {
 		this.rolePolicyState = rolePolicyState;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AppRolePolicyDTO other = (AppRolePolicyDTO) obj;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override

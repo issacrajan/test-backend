@@ -8,6 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
+/**
+ * 
+ * @author issac
+ *
+ */
 @Entity
 public class Physician extends BaseEntityVer {
 

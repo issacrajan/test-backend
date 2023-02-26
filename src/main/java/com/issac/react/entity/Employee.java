@@ -10,6 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderColumn;
 
+/**
+ * 
+ * @author issac
+ *
+ */
 @Entity
 public class Employee extends BaseEntityVer {
 

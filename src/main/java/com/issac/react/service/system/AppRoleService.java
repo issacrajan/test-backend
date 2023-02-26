@@ -35,7 +35,7 @@ public class AppRoleService {
 			if (!isValid(appRoleDTO)) {
 				throw new InvalidInputException("validation errors");
 			}
-			AppRole appRole = appRoleDTO.buildEntity();
+			AppRole appRole = appRoleDTO.buildNewEntity();
 			AppRole saved = appRoleRepo.save(appRole);
 			return AppRoleDTO.build(saved);
 		} else if (RecordMode.EDIT == appRoleDTO.getRecordMode()) {
