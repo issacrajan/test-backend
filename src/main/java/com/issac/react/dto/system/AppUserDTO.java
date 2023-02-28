@@ -1,6 +1,6 @@
 package com.issac.react.dto.system;
 
-import com.issac.react.dto.BaseDTO;
+import com.issac.react.dto.BaseVerDTO;
 import com.issac.react.entity.AppUser;
 
 import jakarta.validation.constraints.NotBlank;
@@ -10,24 +10,23 @@ import jakarta.validation.constraints.NotBlank;
  * @author issac
  *
  */
-public class AppUserDTO extends BaseDTO {
+public class AppUserDTO extends BaseVerDTO {
 	private String id;
-
-	@NotBlank(message = "name should not be empty")
-	private String name;
-
-	private String lastname;
 
 	@NotBlank(message = "email should not be empty")
 	private String email;
 
-	@NotBlank(message = "password should not be empty")
+//	@NotBlank(message = "password should not be empty")
 	private String password;
+	private String firstName;
+
+	@NotBlank(message = "last name should not be empty")
+	private String lastName;
 
 	private String location;
 
-	@NotBlank(message = "role should not be empty")
-	private String appRole;
+	@NotBlank(message = "role name should not be empty")
+	private String appRoleName;
 
 	public static AppUserDTO build(AppUser u) {
 		if (u == null) {
@@ -36,15 +35,13 @@ public class AppUserDTO extends BaseDTO {
 
 		AppUserDTO dto = new AppUserDTO();
 		dto.setId(u.getId());
-		dto.setName(u.getName());
-		dto.setLastname(u.getLastname());
 		dto.setEmail(u.getEmail());
 		// dto.setPassword(u.getPassword());
+		dto.setFirstName(u.getFirstName());
+		dto.setLastName(u.getLastName());
 		dto.setLocation(u.getLocation());
-		dto.setCreatedTs(u.getCreatedTs());
-		dto.setCreatedBy(u.getCreatedBy());
-		dto.setUpdatedTs(u.getUpdatedTs());
-		dto.setUpdatedBy(u.getUpdatedBy());
+		dto.setAppRoleName(u.getUserRole().getRoleName());
+		BaseVerDTO.build(dto, u);
 
 		return dto;
 	}
@@ -55,22 +52,6 @@ public class AppUserDTO extends BaseDTO {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
 	}
 
 	public String getEmail() {
@@ -89,6 +70,22 @@ public class AppUserDTO extends BaseDTO {
 		this.password = password;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -97,19 +94,19 @@ public class AppUserDTO extends BaseDTO {
 		this.location = location;
 	}
 
-	public String getAppRole() {
-		return appRole;
+	public String getAppRoleName() {
+		return appRoleName;
 	}
 
-	public void setAppRole(String appRole) {
-		this.appRole = appRole;
+	public void setAppRoleName(String appRoleName) {
+		this.appRoleName = appRoleName;
 	}
 
 	@Override
 	public String toString() {
-		return "UserInfoDTO [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email
-				+ ", password=" + password + ", location=" + location + ", createdTs=" + createdTs
-				+ ", updatedTs=" + updatedTs + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+		return "AppUserDTO [id=" + id + ", email=" + email + ", password=" + password + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", location=" + location + ", appRoleName="
+				+ appRoleName + "]";
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,16 +14,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "app_user", indexes = {
-		@Index(name = "idx_app_user_email", columnList = "email", unique = true) })
+@Table(
+		name = "app_user",
+			indexes = { @Index(name = "idx_app_user_email", columnList = "email", unique = true) })
 public class AppUser extends BaseEntityVer {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
-
-	private String name;
-	private String lastname;
 
 	@Column(nullable = false)
 	private String email;
@@ -30,10 +31,13 @@ public class AppUser extends BaseEntityVer {
 	@Column(nullable = false)
 	private String password;
 
+	private String firstName;
+	private String lastName;
+
 	private String location;
 
-	@ManyToOne
-	@JoinColumn(name = "role_id")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "role_id", nullable = false)
 	private AppRole userRole;
 
 	public String getId() {
@@ -42,22 +46,6 @@ public class AppUser extends BaseEntityVer {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
 	}
 
 	public String getEmail() {
@@ -74,6 +62,30 @@ public class AppUser extends BaseEntityVer {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public AppRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(AppRole userRole) {
+		this.userRole = userRole;
 	}
 
 	public String getLocation() {
@@ -103,8 +115,8 @@ public class AppUser extends BaseEntityVer {
 
 	@Override
 	public String toString() {
-		return "AppUser [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email
-				+ ", password=" + password + ", location=" + location + "]";
+		return "AppUser [id=" + id + ", email=" + email + ", password=" + password + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", location=" + location + ", userRole=" + userRole
+				+ "]";
 	}
-
 }

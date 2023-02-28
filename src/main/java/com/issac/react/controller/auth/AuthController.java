@@ -24,10 +24,10 @@ import jakarta.validation.Valid;
 @CrossOrigin
 public class AuthController {
 	private static final Logger logger = LoggerFactory.getLogger(JobController.class);
-	
+
 	private UserService userService;
 	private JwtUtil jwtUtil;
-	
+
 	public AuthController(UserService userService, JwtUtil jwtUtil) {
 		this.userService = userService;
 		this.jwtUtil = jwtUtil;
@@ -36,7 +36,7 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<UserRegisterRespDTO> createUser(@Valid @RequestBody AppUserDTO userInfo) {
 		AppUserDTO dto = userService.createUser(userInfo);
-		String token = jwtUtil.createJWT(dto.getId(),dto.getName(), dto.getEmail(), "Admin", 100);
+		String token = jwtUtil.createJWT(dto.getId(), dto.getLastName(), dto.getEmail(), "Admin", 100);
 		logger.info("token: " + token);
 		UserRegisterRespDTO resp = new UserRegisterRespDTO(dto, token);
 		return new ResponseEntity<>(resp, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<UserRegisterRespDTO> login(@Valid @RequestBody UserLoginDTO userLoginDTO) {
 		AppUserDTO dto = userService.validateLogin(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-		String token = jwtUtil.createJWT(dto.getId(), dto.getName(), dto.getEmail(), "Admin", 100);
+		String token = jwtUtil.createJWT(dto.getId(), dto.getLastName(), dto.getEmail(), "Admin", 100);
 		logger.info("token: " + token);
 		UserRegisterRespDTO resp = new UserRegisterRespDTO(dto, token);
 		return new ResponseEntity<>(resp, HttpStatus.OK);

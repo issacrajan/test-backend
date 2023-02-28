@@ -1,5 +1,6 @@
 package com.issac.react.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedBy;
@@ -19,7 +20,9 @@ import jakarta.persistence.Version;
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntityVer {
+public abstract class BaseEntityVer implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@CreatedBy
 	private String createdBy;

@@ -2,28 +2,42 @@ package com.issac.react.service.system;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.issac.react.dto.system.AppUserDTO;
 import com.issac.react.dto.system.UserProfileDTO;
+import com.issac.react.entity.AppRole;
 import com.issac.react.entity.AppUser;
 import com.issac.react.exception.RecordAlreadyExists;
 import com.issac.react.exception.RecordNotFoundException;
+import com.issac.react.repo.AppRoleRepo;
 import com.issac.react.repo.UserRepo;
 
+/**
+ * 
+ * @author issac
+ *
+ */
 @Service
 public class UserService {
 
 	private UserRepo userRepo;
+	private AppRoleRepo appRoleRepo;
+	private PasswordEncoder encoder;
 
-	public UserService(UserRepo userRepo) {
+	public UserService(UserRepo userRepo, AppRoleRepo appRoleRepo, PasswordEncoder encoder) {
 		this.userRepo = userRepo;
+		this.appRoleRepo = appRoleRepo;
+		this.encoder = encoder;
 	}
 
 	public AppUserDTO getUserById(String userId) {
 		return AppUserDTO.build(userRepo.getReferenceById(userId));
 	}
+
 	public AppUserDTO getUser(String email) {
 		return AppUserDTO.build(userRepo.findByEmail(email));
 	}
@@ -33,7 +47,8 @@ public class UserService {
 		if (user == null) {
 			throw new RecordNotFoundException("user not found / invalid password");
 		}
-		boolean pwdMatch = user.getPassword().equals(password);
+		String encodedPwd = encoder.encode(password);
+		boolean pwdMatch = user.getPassword().equals(encodedPwd);
 		if (!pwdMatch) {
 			throw new RecordNotFoundException("user not found / invalid password");
 		}
@@ -55,39 +70,54 @@ public class UserService {
 			throw new RecordAlreadyExists("user with email " + dto.getEmail() + " already exists");
 		}
 		AppUser user = new AppUser();
-		user.setName(dto.getName());
-		user.setLastname(dto.getLastname());
 		user.setEmail(dto.getEmail());
-		user.setPassword(dto.getPassword());
+		user.setPassword(encoder.encode(dto.getPassword()));
+		user.setFirstName(dto.getFirstName());
+		user.setLastName(dto.getLastName());
 		user.setLocation(dto.getLocation());
+		String roleName = dto.getAppRoleName();
+		Optional<AppRole> appRole = appRoleRepo.findByRoleName(roleName);
+		if (appRole.isEmpty()) {
+			throw new RecordNotFoundException("role name " + dto.getAppRoleName() + " not found");
+		}
+		user.setUserRole(appRole.get());
 
 		AppUser savedRec = userRepo.save(user);
 		return AppUserDTO.build(savedRec);
 	}
 
 	public AppUserDTO updateUser(AppUserDTO dto) {
-		AppUser userInfo = userRepo.findByEmail(dto.getEmail());
-		if (userInfo == null) {
+		Optional<AppUser> userObj = userRepo.findById(dto.getId());
+		if (userObj == null || userObj.isEmpty()) {
 			throw new RecordNotFoundException("user with id " + dto.getId() + " not found");
 		}
-		AppUser user = userRepo.getReferenceById(dto.getId());
-		user.setName(dto.getName());
-		user.setLastname(dto.getLastname());
-		// user.setEmail(dto.getEmail());
-		user.setPassword(dto.getPassword());
+		AppUser user = userObj.get();
+//		user.setEmail(dto.getEmail());
+//		user.setPassword(dto.getPassword());
+
+		user.setFirstName(dto.getFirstName());
+		user.setLastName(dto.getLastName());
+
 		user.setLocation(dto.getLocation());
+		user.setVersionNum(dto.getVersionNum());
+		String roleName = dto.getAppRoleName();
+		Optional<AppRole> appRole = appRoleRepo.findByRoleName(roleName);
+		if (appRole.isEmpty()) {
+			throw new RecordNotFoundException("role name " + dto.getAppRoleName() + " not found");
+		}
+		user.setUserRole(appRole.get());
 
 		AppUser savedRec = userRepo.save(user);
 		return AppUserDTO.build(savedRec);
 	}
-	
+
 	public AppUserDTO updateUserProfile(UserProfileDTO dto) {
 		AppUser user = userRepo.findByEmail(dto.getEmail());
 		if (user == null) {
 			throw new RecordNotFoundException("user with email " + dto.getEmail() + " not found");
 		}
-		user.setName(dto.getName());
-		user.setLastname(dto.getLastname());
+		user.setFirstName(dto.getFirstName());
+		user.setLastName(dto.getLastName());
 		user.setLocation(dto.getLocation());
 
 		AppUser savedRec = userRepo.save(user);

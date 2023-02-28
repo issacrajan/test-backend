@@ -10,12 +10,13 @@ import jakarta.validation.constraints.NotBlank;
 public class UserProfileDTO {
 	private String id;
 
-	@NotBlank(message = "name should not be empty")
-	private String name;
-	private String lastname;
 	@NotBlank(message = "email should not be empty")
 	private String email;
 
+	@NotBlank(message = "name should not be empty")
+	private String lastName;
+
+	private String firstName;
 	private String location;
 
 	public String getId() {
@@ -26,28 +27,28 @@ public class UserProfileDTO {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLocation() {
@@ -60,8 +61,8 @@ public class UserProfileDTO {
 
 	@Override
 	public String toString() {
-		return "UserProfileDTO [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email
-				+ ", location=" + location + "]";
+		return "UserProfileDTO [id=" + id + ", email=" + email + ", lastName=" + lastName + ", firstName="
+				+ firstName + ", location=" + location + "]";
 	}
 
 }
