@@ -5,8 +5,12 @@ public class StringUtil {
 	public static boolean isEmpty(String str) {
 		return str == null || str.isBlank();
 	}
-	
+
 	public static boolean hasContent(String str) {
 		return str != null && !str.isBlank();
+	}
+
+	public static boolean hasValidSearch(String str) {
+		return str != null && !str.isBlank() && !"all".equals(str);
 	}
 }
