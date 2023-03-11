@@ -6,11 +6,20 @@ import java.util.Map;
 import com.issac.react.util.StringUtil;
 
 public class AppContext {
+	private String tenentId;
 	private String userId;
 	private String userName;
 	private String email;
 	private String roleName;
 	private Map<String, String> errors;
+
+	public String getTenentId() {
+		return tenentId;
+	}
+
+	public void setTenentId(String tenentId) {
+		this.tenentId = tenentId;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -64,8 +73,8 @@ public class AppContext {
 
 	@Override
 	public String toString() {
-		return "AppContext [userId=" + userId + ", userName=" + userName + ", email=" + email + ", roleName="
-				+ roleName + "]";
+		return "AppContext [tenentId=" + tenentId + ", userId=" + userId + ", userName=" + userName
+				+ ", email=" + email + ", roleName=" + roleName + ", errors=" + errors + "]";
 	}
 
 }

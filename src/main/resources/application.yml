@@ -1,0 +1,42 @@
+
+server:
+  port: 9999
+
+tenant-configuraion:
+  tenants:
+    - 
+      name: jv
+      db_driver: org.postgresql.Driver
+      db_url: jdbc:postgresql://localhost:5432/jv
+      db_user: postgres
+      db_password: Admin123
+    -
+      name: jv2
+      db_driver: org.postgresql.Driver
+      db_url: jdbc:postgresql://localhost:5432/jv2
+      db_user: postgres
+      db_password: Admin123
+
+
+spring:
+  datasource:
+    initialization-mode: never
+  jpa:
+    hibernate:
+      ddl-auto: none
+      format_sql: true
+      dialect: org.hibernate.dialect.PostgreSQL91Dialect
+    show-sql: true
+    properties: 
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL91Dialect
+      javax:
+        persistence:
+          schema-generation:
+            scripts:
+              action: create
+              create-target: create_sql.txt
+              create-source: metadata
+          
+       
+

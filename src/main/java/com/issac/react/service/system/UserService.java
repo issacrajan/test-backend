@@ -47,8 +47,8 @@ public class UserService {
 		if (user == null) {
 			throw new RecordNotFoundException("user not found / invalid password");
 		}
-		String encodedPwd = encoder.encode(password);
-		boolean pwdMatch = user.getPassword().equals(encodedPwd);
+		boolean pwdMatch = encoder.matches(password, user.getPassword());
+		// boolean pwdMatch = user.getPassword().equals(encodedPwd);
 		if (!pwdMatch) {
 			throw new RecordNotFoundException("user not found / invalid password");
 		}

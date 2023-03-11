@@ -48,7 +48,7 @@ public class AuthFilter implements Filter {
 
 		String authHeader = req.getHeader("Authorization");
 		if (StringUtil.isEmpty(authHeader)) {
-			send401Resp(res);
+			send401Resp(res, MESSAGE_UNAUTHORIZED);
 			return;
 		}
 		String token = null;
@@ -56,7 +56,7 @@ public class AuthFilter implements Filter {
 			token = authHeader.substring(7);
 		}
 		if (StringUtil.isEmpty(token)) {
-			send401Resp(res);
+			send401Resp(res, MESSAGE_UNAUTHORIZED);
 			return;
 		}
 
@@ -66,11 +66,11 @@ public class AuthFilter implements Filter {
 			parsetJWT = jwtUtil.parsetJWT(token);
 		} catch (ExpiredJwtException expiredExc) {
 			logger.info("ExpiredJwtException " + req.getRequestURI());
-			send401Resp(res);
+			send401Resp(res, MESSAGE_UNAUTHORIZED);
 			return;
 		} catch (Exception e) {
 			logger.error("error while parsing ", e);
-			send401Resp(res);
+			send401Resp(res, MESSAGE_UNAUTHORIZED);
 			return;
 		}
 		AppContext appContext = AppContextHolder.getContext();
@@ -85,12 +85,12 @@ public class AuthFilter implements Filter {
 		logger.info("AuthFilter processed:" + req.getRequestURI());
 	}
 
-	private void send401Resp(HttpServletResponse res) throws IOException {
+	public static void send401Resp(HttpServletResponse res, String msg) throws IOException {
 		res.sendError(401);
 		PrintWriter out = res.getWriter();
 		res.setContentType("application/json");
 		res.setCharacterEncoding("UTF-8");
-		out.print(MESSAGE_UNAUTHORIZED);
+		out.print(msg);
 		out.flush();
 	}
 

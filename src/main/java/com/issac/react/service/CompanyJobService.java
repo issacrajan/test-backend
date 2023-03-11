@@ -12,9 +12,20 @@ import com.issac.react.dto.job.MonthlyAppDTO;
 import com.issac.react.entity.CompanyJob;
 import com.issac.react.exception.RecordNotFoundException;
 import com.issac.react.repo.CompanyJobRepo;
+import com.issac.react.util.StringUtil;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 @Service
 public class CompanyJobService {
+	@PersistenceContext
+	private EntityManager entityManager;
+
 	private CompanyJobRepo companyJobRepo;
 
 	public CompanyJobService(CompanyJobRepo companyJobRepo) {
@@ -25,6 +36,22 @@ public class CompanyJobService {
 		List<CompanyJob> allJobs = companyJobRepo.findAll();
 
 		return allJobs.stream().map(job -> CompanyJobDTO.buildDTO(job)).collect(Collectors.toList());
+
+	}
+
+	public List<CompanyJobDTO> search(CompanyJobSearchDTO search) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<CompanyJob> query = cb.createQuery(CompanyJob.class);
+		Root<CompanyJob> job = query.from(CompanyJob.class);
+
+		query.select(job).where(cb.like(job.get("jobLocation"), search.getJobLocation()));
+		if (StringUtil.hasContent(search.getJobStatus())) {
+			query.where(cb.equal(job.get("jobStatus"), search.getJobStatus()));
+		}
+		TypedQuery<CompanyJob> createQuery = entityManager.createQuery(query);
+		List<CompanyJob> resultList = createQuery.getResultList();
+
+		return resultList.stream().map(jobRec -> CompanyJobDTO.buildDTO(jobRec)).collect(Collectors.toList());
 
 	}
 

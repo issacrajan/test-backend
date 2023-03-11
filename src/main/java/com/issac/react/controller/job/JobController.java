@@ -21,6 +21,7 @@ import com.issac.react.config.AppContext;
 import com.issac.react.config.AppContextHolder;
 import com.issac.react.dto.SimpleResponseDTO;
 import com.issac.react.dto.job.CompanyJobDTO;
+import com.issac.react.dto.job.CompanyJobSearchDTO;
 import com.issac.react.dto.job.CompanyJobSearchResultDTO;
 import com.issac.react.dto.job.JobStatsContainer;
 import com.issac.react.dto.job.JobStatsDTO;
@@ -71,6 +72,16 @@ public class JobController {
 	@GetMapping("/getjobs")
 	public ResponseEntity<CompanyJobSearchResultDTO> getJobs() {
 		List<CompanyJobDTO> jobs = companyJobService.getJobs(null);
+		List<JobStatusCntDTO> countByJobStatusDTO = companyJobService.getCountByJobStatus("newton");
+		CompanyJobSearchResultDTO companyJobSearchResultDTO = new CompanyJobSearchResultDTO(jobs);
+		companyJobSearchResultDTO.setJobStatusCntList(countByJobStatusDTO);
+
+		return new ResponseEntity<>(companyJobSearchResultDTO, HttpStatus.OK);
+	}
+
+	@PostMapping("/searchjobs")
+	public ResponseEntity<CompanyJobSearchResultDTO> searchJobs(@RequestBody CompanyJobSearchDTO dto) {
+		List<CompanyJobDTO> jobs = companyJobService.search(dto);
 		List<JobStatusCntDTO> countByJobStatusDTO = companyJobService.getCountByJobStatus("newton");
 		CompanyJobSearchResultDTO companyJobSearchResultDTO = new CompanyJobSearchResultDTO(jobs);
 		companyJobSearchResultDTO.setJobStatusCntList(countByJobStatusDTO);
