@@ -72,7 +72,11 @@ public class JobController {
 	@GetMapping("/getjobs")
 	public ResponseEntity<CompanyJobSearchResultDTO> getJobs() {
 		List<CompanyJobDTO> jobs = companyJobService.getJobs(null);
-		List<JobStatusCntDTO> countByJobStatusDTO = companyJobService.getCountByJobStatus("newton");
+
+		AppContext ctx = AppContextHolder.getContext();
+		String userName = ctx.getUserName();
+
+		List<JobStatusCntDTO> countByJobStatusDTO = companyJobService.getCountByJobStatus(userName);
 		CompanyJobSearchResultDTO companyJobSearchResultDTO = new CompanyJobSearchResultDTO(jobs);
 		companyJobSearchResultDTO.setJobStatusCntList(countByJobStatusDTO);
 
@@ -82,7 +86,11 @@ public class JobController {
 	@PostMapping("/searchjobs")
 	public ResponseEntity<CompanyJobSearchResultDTO> searchJobs(@RequestBody CompanyJobSearchDTO dto) {
 		List<CompanyJobDTO> jobs = companyJobService.search(dto);
-		List<JobStatusCntDTO> countByJobStatusDTO = companyJobService.getCountByJobStatus("newton");
+
+		AppContext ctx = AppContextHolder.getContext();
+		String userName = ctx.getUserName();
+
+		List<JobStatusCntDTO> countByJobStatusDTO = companyJobService.getCountByJobStatus(userName);
 		CompanyJobSearchResultDTO companyJobSearchResultDTO = new CompanyJobSearchResultDTO(jobs);
 		companyJobSearchResultDTO.setJobStatusCntList(countByJobStatusDTO);
 

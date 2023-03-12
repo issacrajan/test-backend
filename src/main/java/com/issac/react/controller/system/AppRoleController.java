@@ -37,11 +37,11 @@ public class AppRoleController {
 
 		if (saved == null) {
 			return ResponseEntity.notFound().build();
-		} else {
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-					.buildAndExpand(saved.getId()).toUri();
-
-			return ResponseEntity.created(uri).body(saved);
 		}
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(saved.getId())
+				.toUri();
+
+		return ResponseEntity.created(uri).body(saved);
+
 	}
 }
